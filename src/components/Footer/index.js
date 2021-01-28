@@ -1,7 +1,8 @@
+/* eslint-disable linebreak-style */
 import styled from 'styled-components';
 
 const FooterWrapper = styled.footer`
-  background-color: #00000070;
+  background-color: #00000090;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -24,18 +25,28 @@ const FooterWrapper = styled.footer`
 `;
 
 export default function Footer(props) {
-    return (
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      <FooterWrapper {...props}>
+  return (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+    <FooterWrapper {...props}>
+      <a href="https://www.alura.com.br/">
+        <img src="https://www.alura.com.br/assets/img/alura-logo-white.1570550707.svg" alt="Logo Alura" />
+      </a>
+      <p>
+        developed by
+        {' '}
+        <strong>Andy</strong>
+        {' '}
+        with
+        {' '}
+        <span>♥</span>
+        {' '}
+        for
+        {' '}
+        {' '}
         <a href="https://www.alura.com.br/">
-          <img src="https://www.alura.com.br/assets/img/alura-logo-white.1570550707.svg" alt="Logo Alura" />
+          Imersão React Alura
         </a>
-        <p>
-          developed by <strong>Andy</strong> with <span>♥</span> for {' '}
-          <a href="https://www.alura.com.br/">
-            Imersão React Alura
-          </a>
-        </p>
-      </FooterWrapper>
-    );
-} 
+      </p>
+    </FooterWrapper>
+  );
+}

@@ -1,9 +1,10 @@
+/* eslint-disable linebreak-style */
 import styled from 'styled-components';
 
 const Widget = styled.div`
   margin: 24px 0;
-  border: 1px solid ${({theme}) => theme.colors.primary};
-  background-color: ${({theme}) => theme.colors.grayDark};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.grayDark};
   border-radius: 4px;
   overflow: hidden;
 
@@ -44,6 +45,26 @@ Widget.Content = styled.div`
   ul {
     list-style: none;
     padding: 0;
+  }
+`;
+
+Widget.Topic = styled.a`
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  outline: 0;
+  border-radius: ${({ theme }) => theme.borderRadius};
+
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.contrastText};
+  background-color: ${({ theme }) => `${theme.colors.contrastText}40`};
+
+  transition: .3s;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    opacity: .5;
   }
 `;
 
