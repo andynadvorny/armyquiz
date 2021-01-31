@@ -48,6 +48,11 @@ Widget.Content = styled.div`
   }
 `;
 
+Widget.Loader = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 Widget.Topic = styled.a`
   display: block;
   padding: 10px 15px;
