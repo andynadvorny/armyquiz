@@ -81,9 +81,10 @@ export default function Home() {
           <Widget.Content>
             <ul>
               {db.external.map((quiz) => {
-                const [githubUser, projectName] = quiz
-                  .replace('https://github.com/', '')
-                  .split('/');
+                const [projectName, githubUser] = quiz
+                  .replace('https://', '')
+                  .replace('.vercel.app/', '')
+                  .split('.');
 
                 return (
                   <li key={quiz}>
