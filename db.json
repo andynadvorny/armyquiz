@@ -27,7 +27,9 @@
       }
     ],
     "external": [
-      ""
+      "https://github.com/andynadvorny/armyquiz",
+      "https://github.com/andynadvorny/armyquiz",
+      "https://github.com/andynadvorny/armyquiz"
     ],
     "theme": {
       "colors": {
@@ -40,7 +42,7 @@
         "grayMedium": "#767676",
         "grayDark": "#141414",
         "white": "#fff",
-        "mainBg": "#171B35",
+        "mainBg": "#141414",
         "contrastText": "#FFFFFF",
         "wrong": "#FF5722",
         "success": "#4CAF50"

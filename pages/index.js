@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 
 import db from '../db.json';
@@ -7,6 +8,7 @@ import QuizLogo from '../src/components/QuizLogo';
 import QuizBackground from '../src/components/QuizBackground';
 import QuizContainer from '../src/components/QuizContainer';
 import Widget from '../src/components/Widget';
+import Link from '../src/components/Link';
 import Button from '../src/components/Button';
 import Input from '../src/components/Input';
 import Footer from '../src/components/Footer';
@@ -31,7 +33,16 @@ export default function Home() {
       </Head>
       <QuizContainer>
         <QuizLogo />
-        <Widget>
+        <Widget
+          as={motion.section}
+          transition={{ delay: 0, duration: 0.5 }}
+          variants={{
+            show: { opacity: 1, y: 0 },
+            hidden: { opacity: 0, y: '100%' },
+          }}
+          initial="hidden"
+          animate="show"
+        >
           <Widget.Header>
             <h1>{db.title}</h1>
           </Widget.Header>
@@ -54,12 +65,51 @@ export default function Home() {
             </form>
           </Widget.Content>
         </Widget>
-        <Widget>
-          <Widget.Content>
+        <Widget
+          as={motion.section}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          variants={{
+            show: { opacity: 1, y: 0 },
+            hidden: { opacity: 0, y: '100%' },
+          }}
+          initial="hidden"
+          animate="show"
+        >
+          <Widget.Header>
             <h1>Other Quizes</h1>
+          </Widget.Header>
+          <Widget.Content>
+            <ul>
+              {db.external.map((quiz) => {
+                const [githubUser, projectName] = quiz
+                  .replace('https://github.com/', '')
+                  .split('/');
+
+                return (
+                  <li key={quiz}>
+                    <Widget.Topic
+                      as={Link}
+                      href={`/quiz/${projectName}___${githubUser}`}
+                    >
+                      {`${githubUser}/${projectName}`}
+                    </Widget.Topic>
+                  </li>
+
+                );
+              })}
+            </ul>
           </Widget.Content>
         </Widget>
-        <Footer />
+        <Footer
+          as={motion.footer}
+          transition={{ delay: 1, duration: 0.5 }}
+          variants={{
+            show: { opacity: 1, y: 0 },
+            hidden: { opacity: 0, y: '100%' },
+          }}
+          initial="hidden"
+          animate="show"
+        />
       </QuizContainer>
       <GitHubCorner projectUrl="https://github.com/andynadvorny/armyquiz" />
     </QuizBackground>

@@ -2,32 +2,36 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 import React from 'react';
-import Loader from 'react-loader-spinner';
+import { motion } from 'framer-motion';
 
-import db from '../db.json';
-import QuizLogo from '../src/components/QuizLogo';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizContainer from '../src/components/QuizContainer';
-import AlternativesForm from '../src/components/AlternativesForm';
-import Widget from '../src/components/Widget';
-import Button from '../src/components/Button';
-import Footer from '../src/components/Footer';
-import GitHubCorner from '../src/components/GitHubCorner';
+import QuizLogo from '../../components/QuizLogo';
+import QuizBackground from '../../components/QuizBackground';
+import QuizContainer from '../../components/QuizContainer';
+import AlternativesForm from '../../components/AlternativesForm';
+import Widget from '../../components/Widget';
+import Button from '../../components/Button';
+import Footer from '../../components/Footer';
+import GitHubCorner from '../../components/GitHubCorner';
+import LoaderHearts from '../../components/LoaderHearts';
+import BackLinkArrow from '../../components/BackLinkArrow';
 
 function LoadingWidget() {
   return (
-    <Widget>
+    <Widget
+      as={motion.section}
+      transition={{ delay: 0, duration: 0.5 }}
+      variants={{
+        show: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: '100%' },
+      }}
+      initial="hidden"
+      animate="show"
+    >
       <Widget.Header>
         Loading...
       </Widget.Header>
       <Widget.Loader>
-        <Loader
-          type="Hearts"
-          color={`${db.theme.colors.primary}`}
-          height={80}
-          width={80}
-          timeout={8000}
-        />
+        <LoaderHearts />
       </Widget.Loader>
     </Widget>
   );
@@ -35,7 +39,16 @@ function LoadingWidget() {
 
 function ResultWidget({ results }) {
   return (
-    <Widget>
+    <Widget
+      as={motion.section}
+      transition={{ delay: 0, duration: 0.5 }}
+      variants={{
+        show: { opacity: 1 },
+        hidden: { opacity: 0 },
+      }}
+      initial="hidden"
+      animate="show"
+    >
       <Widget.Header>
         Results
       </Widget.Header>
@@ -64,8 +77,18 @@ function QuestionWidget({
   const questionId = `question__${questionIndex + 1}`;
   const isCorrect = selectedAlternative === question.answer;
   return (
-    <Widget>
+    <Widget
+      as={motion.section}
+      transition={{ delay: 0, duration: 0.5 }}
+      variants={{
+        show: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: '-50%' },
+      }}
+      initial="hidden"
+      animate="show"
+    >
       <Widget.Header>
+        <BackLinkArrow href="/" />
         <h3>{`Question ${questionIndex + 1} of ${totalQuestions}`}</h3>
       </Widget.Header>
 
@@ -134,12 +157,12 @@ const screenStates = {
   RESULT: 'RESULT',
 };
 
-export default function QuizPage() {
+export default function QuizPage({ externalQuestions, externalBg }) {
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const [results, setResult] = React.useState([]);
   const [questionIndex, setQuestionIndex] = React.useState(0);
-  const question = db.questions[questionIndex];
-  const totalQuestions = db.questions.length;
+  const question = externalQuestions[questionIndex];
+  const totalQuestions = externalQuestions.length;
 
   function addResult(result) {
     setResult([
@@ -164,7 +187,7 @@ export default function QuizPage() {
   }
 
   return (
-    <QuizBackground backgroundImage={db.bg}>
+    <QuizBackground backgroundImage={externalBg}>
       <QuizContainer>
         <QuizLogo />
         {screenState === screenStates.LOADING && <LoadingWidget />}
@@ -179,7 +202,16 @@ export default function QuizPage() {
           />
         )}
         {screenState === screenStates.RESULT && <ResultWidget results={results} />}
-        <Footer />
+        <Footer
+          as={motion.footer}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          variants={{
+            show: { opacity: 1, y: 0 },
+            hidden: { opacity: 0, y: '100%' },
+          }}
+          initial="hidden"
+          animate="show"
+        />
       </QuizContainer>
       <GitHubCorner projectUrl="https://github.com/andynadvorny/armyquiz" />
     </QuizBackground>
